@@ -7,7 +7,6 @@
  */
 
 #include <unistd.h>
-#include <stdlib.h>
 
 int	main(int argments, char **inter)
 {
