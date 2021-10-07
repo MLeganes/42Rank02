@@ -63,9 +63,28 @@ char *ft_strjoin(char *buff_res, char *buff)
 	return (new_buff);
 }
 
-char *ft_cuttingline(char *bier)
+char *ft_cuttingline_updatebuff(char *bf)
 {
-	
+	char	*line;
+	int		i;
+	int		j;
+
+	line = malloc( (ft_check_eol(bf) + 1) * sizeof(char));
+	if (line == NULL)
+		return (NULL);
+	i = 0;
+	while(bf[i] != '\n')
+	{
+		line[i] = bf[i];
+		i++;
+	}
+	j = 0;
+	while(bf[i] != '\0')
+	{
+		bf[j] = bf[i + j + 1]; //I do not want to copy \n, j + 1.
+		j++;
+	}
+	return (line);	
 }
 
 char *get_next_line(int fd)
@@ -74,7 +93,7 @@ char *get_next_line(int fd)
 	static char	*buff_res;
 	char buff	[BUFFER_SIZE + 1];
 	int			bytes_readed;
-	char		*line;
+	char		*line = NULL;
 
 	bytes_readed = 0;	
 	while( ft_check_eol(buff_res) == -1)
@@ -86,7 +105,7 @@ char *get_next_line(int fd)
 			{
 				free(line);
 				return (NULL);
-			}w
+			}
 			line = buff_res;
 			buff_res = NULL;
 			return (line);			
@@ -95,9 +114,8 @@ char *get_next_line(int fd)
 		//add buff to buff_res
 		buff_res = ft_strjoin(buff_res, buff);
 	}
-	//Theres is at least one line, cut it!!!!
-	line = ft_cuttingline(buff_res);
-	//update static rest
+	//Theres is at least one line, cut it!!!! and update buffer_res.
+	line = ft_cuttingline_updatebuff(buff_res);
 	return (line);
 }
 
@@ -110,7 +128,7 @@ int	main(void)
 	line = get_next_line(fd);
 	while(line)
 	{
-		printf("%s", line);
+		printf("%s\n", line);
 		free(line);
 		line = get_next_line(fd);
 	}
