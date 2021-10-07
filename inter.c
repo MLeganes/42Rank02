@@ -26,10 +26,10 @@ int	main(int argments, char **inter)
 			while (inter[i][j])
 			{
 				if (i == 2)
-					used[inter[i][j]] = 1;
-				else if (i == 1 && used[inter[i][j]] == 1)
+					used[(int)inter[i][j]] = 1;
+				else if (i == 1 && used[(int)inter[i][j]] == 1)
 				{
-					used[inter[i][j]] = 2;
+					used[(int)inter[i][j]] = 2;
 					write(1, &inter[i][j], 1);
 				}
 				j++;
