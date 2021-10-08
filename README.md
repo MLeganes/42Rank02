@@ -1,6 +1,6 @@
 # 42Rank02
 
-##GetNextLine
+## GetNextLine
 
 No working!!! 
 I am working on it to fix it!
